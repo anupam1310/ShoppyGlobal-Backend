@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import productrouter from './Router/Product.router.js';
 import cartrouter from './Router/Cart.router.js';
+import userRouter from './Router/User.router.js';
 
 mongoose.connect('mongodb+srv://anupamkaushik3_db_user:rt2hy8ED5w1xxCGe@projectecommerce.ev7uxzg.mongodb.net/').
 then(() => {
@@ -19,5 +20,6 @@ app.listen(port, ()=>{console.log(`the server is listening to port : ${port}`)})
 
 productrouter(app);
 cartrouter(app);
+userRouter(app);
 
 
