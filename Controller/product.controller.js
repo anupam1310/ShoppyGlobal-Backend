@@ -1,5 +1,5 @@
 import ProductModel from "../Models/Product.model.js";
-
+// Create a new product
 export async function createProduct(req, res) {
     const newProduct = req.body;
 
@@ -10,7 +10,7 @@ export async function createProduct(req, res) {
         res.status(500).send(`Error creating product : ${error.message}`);
     }
 }
-
+// Fetch all products
 export async function fetchAllProducts(req, res) {
     try {
         const products = await ProductModel.find();
@@ -19,7 +19,7 @@ export async function fetchAllProducts(req, res) {
         res.status(500).send('Error fetching products');
     }
 }
-
+// Fetch a product by ID
 export async function fetchProductById(req, res) {
     const productId = req.params.id;
     try {

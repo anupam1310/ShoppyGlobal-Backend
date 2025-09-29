@@ -1,5 +1,7 @@
 import { fetchUserCart,addItemToCart, updateCartItem,removeItemFromCart } from "../Controller/cart.controller.js";
 import { verifyToken } from "../Middleware/verify.middleware.js";
+
+// Cart routes with token verification
 function CartRouter(app){
     app.get('/cart', verifyToken, fetchUserCart);
     app.post('/cart', verifyToken, addItemToCart);
