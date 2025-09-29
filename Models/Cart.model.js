@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 const cartSchema = new Schema({
     productId: { type: String, required: true },

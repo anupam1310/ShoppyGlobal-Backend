@@ -1,4 +1,4 @@
-import { fetchAllCartItems,addItemToCart, updateCartItem,removeItemFromCart } from "../Controller/cart.controller";
+import { fetchAllCartItems,addItemToCart, updateCartItem,removeItemFromCart } from "../Controller/cart.controller.js";
 
 function CartRouter(app){
     app.get('/cart', fetchAllCartItems);

@@ -1,5 +1,6 @@
-import CartModel from "../Models/Cart.model";
-import ProductModel from "../Models/Product.model";
+import e from "express";
+import CartModel from "../Models/Cart.model.js";
+import ProductModel from "../Models/Product.model.js";
 
 export async function fetchAllCartItems(req, res) {
     try {
@@ -22,10 +23,37 @@ export async function addItemToCart(req, res) {
             product: productId,
             quantity
         });
-        CartModel.create(cartItem) ;
-        res.status(201).json(cartItem);
+        let document =  await CartModel.create(cartItem);
+        res.status(201).json(document);
     } catch (error) {
         res.status(500).send('Error adding item to cart');
     }
 }
 
+export async function updateCartItem(req, res) {
+    const cartItemId = req.params.id;
+    const { quantity } = req.body;
+
+    try {
+        const updatedCartItem = await CartModel.findByIdAndUpdate(cartItemId, { quantity }, { new: true });
+        if (!updatedCartItem) {
+            return res.status(404).send('Cart item not found');
+        }
+        res.json(updatedCartItem);
+    } catch (error) {
+        res.status(500).send('Error updating cart item');
+    }
+}
+
+export async function removeItemFromCart(req, res) {
+    const cartItemId = req.params.id;
+    try {
+        const deletedCartItem = await CartModel.findByIdAndDelete(cartItemId);
+        if (!deletedCartItem) {
+            return res.status(404).send('Cart item not found');
+        }
+        res.json({ message: 'Cart item removed successfully' });
+    } catch (error) {
+        res.status(500).send('Error removing cart item');
+    }
+}

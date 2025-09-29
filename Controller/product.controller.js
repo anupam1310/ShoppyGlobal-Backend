@@ -1,4 +1,15 @@
-import ProductModel from "../Models/Product.model";
+import ProductModel from "../Models/Product.model.js";
+
+export async function createProduct(req, res) {
+    const newProduct = req.body;
+
+    try {
+        const savedProduct = await ProductModel.create(newProduct);
+        res.status(201).json(savedProduct);
+    } catch (error) {
+        res.status(500).send(`Error creating product : ${error.message}`);
+    }
+}
 
 export async function fetchAllProducts(req, res) {
     try {
