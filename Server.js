@@ -17,9 +17,9 @@ let app = express();
 app.use(express.json());
 let port = 3050; 
 app.listen(port, ()=>{console.log(`the server is listening to port : ${port}`)});
-
+userRouter(app);
 productrouter(app);
 cartrouter(app);
-userRouter(app);
+
 
 

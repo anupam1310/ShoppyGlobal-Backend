@@ -10,7 +10,7 @@ export async function registerUser(req, res) {
         let document = await UserModel.create(newUser);
         res.status(201).json(document);
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ error: "Internal server error" + ` ${error.message}` });
     }
 
 }
@@ -29,6 +29,6 @@ export async function loginUser(req, res) {
         const token = jwt.sign({ id: user._id }, "SecretKey", { expiresIn: "1h" });
         res.status(200).json({ token });
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ error: "Internal server error" + ` ${error.message}` });
     }   
 }
